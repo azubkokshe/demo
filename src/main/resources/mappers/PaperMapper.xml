@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.PaperMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Paper">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="question_id" jdbcType="VARCHAR" property="questionId" />
+    <result column="paper_id" jdbcType="VARCHAR" property="paperId" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="question_count" jdbcType="INTEGER" property="questionCount" />
+    <result column="correct_count" jdbcType="INTEGER" property="correctCount" />
+    <result column="wrong_count" jdbcType="INTEGER" property="wrongCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, question_id, paper_id, score, question_count, correct_count, wrong_count, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_yu_paper
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_yu_paper
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Paper">
+    insert into t_yu_paper (id, user_id, question_id, 
+      paper_id, score, question_count, 
+      correct_count, wrong_count, create_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{questionId,jdbcType=VARCHAR}, 
+      #{paperId,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}, #{questionCount,jdbcType=INTEGER}, 
+      #{correctCount,jdbcType=INTEGER}, #{wrongCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Paper">
+    insert into t_yu_paper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="paperId != null">
+        paper_id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="questionCount != null">
+        question_count,
+      </if>
+      <if test="correctCount != null">
+        correct_count,
+      </if>
+      <if test="wrongCount != null">
+        wrong_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="paperId != null">
+        #{paperId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="questionCount != null">
+        #{questionCount,jdbcType=INTEGER},
+      </if>
+      <if test="correctCount != null">
+        #{correctCount,jdbcType=INTEGER},
+      </if>
+      <if test="wrongCount != null">
+        #{wrongCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Paper">
+    update t_yu_paper
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="paperId != null">
+        paper_id = #{paperId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="questionCount != null">
+        question_count = #{questionCount,jdbcType=INTEGER},
+      </if>
+      <if test="correctCount != null">
+        correct_count = #{correctCount,jdbcType=INTEGER},
+      </if>
+      <if test="wrongCount != null">
+        wrong_count = #{wrongCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Paper">
+    update t_yu_paper
+    set user_id = #{userId,jdbcType=VARCHAR},
+      question_id = #{questionId,jdbcType=VARCHAR},
+      paper_id = #{paperId,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      question_count = #{questionCount,jdbcType=INTEGER},
+      correct_count = #{correctCount,jdbcType=INTEGER},
+      wrong_count = #{wrongCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

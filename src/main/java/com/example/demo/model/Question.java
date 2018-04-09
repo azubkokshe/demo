@@ -1,15 +1,23 @@
 package com.example.demo.model;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.experimental.Tolerate;
+
+import java.util.Date;
+
+@Builder
+@Data
 public class Question {
     private String id;
 
     private Integer type;
 
-    private Integer questionNo;
+    private Integer questionAuth;
 
     private Integer level;
 
-    private Integer moduleNo;
+    private String moduleId;
 
     private String correctAnswer;
 
@@ -19,75 +27,9 @@ public class Question {
 
     private Double score;
 
-    public String getId() {
-        return id;
-    }
+    private Date createTime;
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    @Tolerate
+    private Question() {}
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getQuestionNo() {
-        return questionNo;
-    }
-
-    public void setQuestionNo(Integer questionNo) {
-        this.questionNo = questionNo;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    public Integer getModuleNo() {
-        return moduleNo;
-    }
-
-    public void setModuleNo(Integer moduleNo) {
-        this.moduleNo = moduleNo;
-    }
-
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer == null ? null : correctAnswer.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public String getKnowledge() {
-        return knowledge;
-    }
-
-    public void setKnowledge(String knowledge) {
-        this.knowledge = knowledge == null ? null : knowledge.trim();
-    }
-
-    public Double getScore() {
-        return score;
-    }
-
-    public void setScore(Double score) {
-        this.score = score;
-    }
 }

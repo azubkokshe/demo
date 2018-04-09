@@ -4,39 +4,59 @@
   <resultMap id="BaseResultMap" type="com.example.demo.model.Question">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="question_no" jdbcType="INTEGER" property="questionNo" />
+    <result column="question_auth" jdbcType="INTEGER" property="questionAuth" />
     <result column="level" jdbcType="INTEGER" property="level" />
-    <result column="module_no" jdbcType="INTEGER" property="moduleNo" />
+    <result column="module_id" jdbcType="VARCHAR" property="moduleId" />
     <result column="correct_answer" jdbcType="VARCHAR" property="correctAnswer" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="knowledge" jdbcType="VARCHAR" property="knowledge" />
     <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, type, question_no, level, module_no, correct_answer, content, knowledge, score
+    id, type, question_auth, level, module_id, correct_answer, content, knowledge, score, 
+    create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from question
+    from t_yu_question
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="findList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_yu_question
+    where  1 = 1
+    <if test="type != null">
+      `type` = #{type}
+    </if>
+    <if test="questionAuth != null">
+      question_auth = #{questionAuth}
+    </if>
+    <if test="level != null">
+      `level` = #{level}
+    </if>
+    <if test="moduleId != null">
+      module_id = #{moduleId}
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from question
+    delete from t_yu_question
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.Question">
-    insert into question (id, type, question_no, 
-      level, module_no, correct_answer, 
-      content, knowledge, score
-      )
-    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{questionNo,jdbcType=INTEGER}, 
-      #{level,jdbcType=INTEGER}, #{moduleNo,jdbcType=INTEGER}, #{correctAnswer,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{knowledge,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}
-      )
+    insert into t_yu_question (id, type, question_auth, 
+      level, module_id, correct_answer, 
+      content, knowledge, score, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{questionAuth,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{moduleId,jdbcType=VARCHAR}, #{correctAnswer,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{knowledge,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Question">
-    insert into question
+    insert into t_yu_question
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -44,14 +64,14 @@
       <if test="type != null">
         type,
       </if>
-      <if test="questionNo != null">
-        question_no,
+      <if test="questionAuth != null">
+        question_auth,
       </if>
       <if test="level != null">
         level,
       </if>
-      <if test="moduleNo != null">
-        module_no,
+      <if test="moduleId != null">
+        module_id,
       </if>
       <if test="correctAnswer != null">
         correct_answer,
@@ -65,6 +85,9 @@
       <if test="score != null">
         score,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,14 +96,14 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="questionNo != null">
-        #{questionNo,jdbcType=INTEGER},
+      <if test="questionAuth != null">
+        #{questionAuth,jdbcType=INTEGER},
       </if>
       <if test="level != null">
         #{level,jdbcType=INTEGER},
       </if>
-      <if test="moduleNo != null">
-        #{moduleNo,jdbcType=INTEGER},
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=VARCHAR},
       </if>
       <if test="correctAnswer != null">
         #{correctAnswer,jdbcType=VARCHAR},
@@ -94,22 +117,25 @@
       <if test="score != null">
         #{score,jdbcType=DOUBLE},
       </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Question">
-    update question
+    update t_yu_question
     <set>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="questionNo != null">
-        question_no = #{questionNo,jdbcType=INTEGER},
+      <if test="questionAuth != null">
+        question_auth = #{questionAuth,jdbcType=INTEGER},
       </if>
       <if test="level != null">
         level = #{level,jdbcType=INTEGER},
       </if>
-      <if test="moduleNo != null">
-        module_no = #{moduleNo,jdbcType=INTEGER},
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=VARCHAR},
       </if>
       <if test="correctAnswer != null">
         correct_answer = #{correctAnswer,jdbcType=VARCHAR},
@@ -123,19 +149,23 @@
       <if test="score != null">
         score = #{score,jdbcType=DOUBLE},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Question">
-    update question
+    update t_yu_question
     set type = #{type,jdbcType=INTEGER},
-      question_no = #{questionNo,jdbcType=INTEGER},
+      question_auth = #{questionAuth,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
-      module_no = #{moduleNo,jdbcType=INTEGER},
+      module_id = #{moduleId,jdbcType=VARCHAR},
       correct_answer = #{correctAnswer,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       knowledge = #{knowledge,jdbcType=VARCHAR},
-      score = #{score,jdbcType=DOUBLE}
+      score = #{score,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
