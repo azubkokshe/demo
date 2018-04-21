@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.model.Question;
 import com.example.demo.service.QuestionService;
-import com.example.demo.utils.UUIDUtils;
+import com.example.demo.utils.UUIDUtil;
 import com.example.demo.constants.Constants;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,7 +57,7 @@ public class QuestionController {
 
 
         Question question = Question.builder()
-                .id(UUIDUtils.uuid())
+                .id(UUIDUtil.uuid())
                 .type(type)
                 .score(score)
                 .correctAnswer(correctAnswer)

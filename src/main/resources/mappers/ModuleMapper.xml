@@ -16,6 +16,11 @@
     from t_yu_module
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="findList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_yu_module
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_yu_module
     where id = #{id,jdbcType=VARCHAR}

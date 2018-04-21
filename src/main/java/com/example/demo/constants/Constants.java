@@ -14,4 +14,8 @@ public class Constants {
     public static final String TRUE = "对";
 
     public static final String FALSE = "错";
+
+    public static final String OK = "200";
+
+    public static final String NOT_ALLOW = "403";
 }

@@ -8,7 +8,7 @@ import java.util.UUID;
  * @author yuwanyi
  * @date 17:03 2018/3/7
  */
-public class UUIDUtils {
+public class UUIDUtil {
     public static String uuid() {
         return UUID.randomUUID().toString().replace("-", "").substring(0,16);
     }

@@ -20,6 +20,13 @@
     from t_yu_user
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectByNameOrMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_yu_user
+    where user_name = #{loginName} or mobile = #{loginName}
+    limit 1
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_yu_user
     where id = #{id,jdbcType=VARCHAR}

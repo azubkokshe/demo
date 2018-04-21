@@ -41,6 +41,24 @@
       module_id = #{moduleId}
     </if>
   </select>
+  <!-- 随机获取试题 -->
+  <select id="findListByRand" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_yu_question
+    where  1 = 1
+    <if test="type != null">
+      `type` = #{type}
+    </if>
+    <if test="questionAuth != null">
+      question_auth = #{questionAuth}
+    </if>
+    <if test="level != null">
+      `level` = #{level}
+    </if>
+    order by rand()
+    limit #{pageSize}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_yu_question
     where id = #{id,jdbcType=VARCHAR}
